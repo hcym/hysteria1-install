@@ -168,7 +168,7 @@ inst_port(){
 
 inst_jump(){
     yellow "The protocol you currently choose is udp, which supports port hopping function"
-    green "The Hysteria port usage pattern is as follows:"
+    green "The Hysteria port usage pattern is as follows: "
     echo ""
     echo -e " ${GREEN}1.${PLAIN} single port ${YELLOW} (default) ${PLAIN}"
     echo -e " ${GREEN}2.${PLAIN} port hopping"
@@ -196,7 +196,7 @@ inst_jump(){
 }
 
 inst_pwd(){
-    read -p "Set Hysteria password (carriage return is skipped for random characters) :  " $auth_pwd
+    read -p "Set Hysteria password (carriage return is skipped for random characters) :  " auth_pwd
     [[ -z $auth_pwd ]] && auth_pwd=$(date +%s%N | md5sum | cut -c 1-8)
     yellow "The password used on the Hysteria node is: $auth_pwd"
 }
@@ -319,7 +319,7 @@ dns:
     - 1.1.1.1
     - 114.114.114.114
 proxies:
-  - name: peyman-Hysteria
+  - name: Peyman-Hysteria
     type: hysteria
     server: $hy_ym
     port: $port
@@ -335,13 +335,13 @@ proxy-groups:
   - name: Proxy
     type: select
     proxies:
-      - peyman-Hysteria
+      - Peyman-Hysteria
       
 rules:
   - GEOIP,CN,DIRECT
   - MATCH,Proxy
 EOF
-    url="hysteria://$hy_ym:$port?protocol=$protocol&auth=$auth_pwd&peer=$domain&insecure=$true&upmbps=10&downmbps=50&alpn=h3#peyman-Hysteria"
+    url="hysteria://$hy_ym:$port?protocol=$protocol&auth=$auth_pwd&peer=$domain&insecure=$true&upmbps=10&downmbps=50&alpn=h3#Peyman-Hysteria"
     echo $url > /root/hy/url.txt
 
     systemctl daemon-reload
@@ -388,7 +388,7 @@ hyswitch(){
     echo ""
     echo -e " ${GREEN}1.${PLAIN} Start Hysteria"
     echo -e " ${GREEN}2.${PLAIN} Close Hysteria"
-    echo -e " ${GREEN}3. ${PLAIN} restart Hysteria"
+    echo -e " ${GREEN}3.${PLAIN} restart Hysteria"
     echo ""
     read -rp "Please enter options [0-3]: " switchInput
     case $switchInput in
@@ -418,11 +418,11 @@ change_cert(){
             hy_ym=$(curl -s4m8 ip.p3terx.com -k | sed -n 1p) || hy_ym=$(curl -s6m8 ip.p3terx.com -k | sed -n 1p)
         fi
     fi
-    sed -i "s/$old_cert/$cert_path" /etc/hysteria/config.json
-    sed -i "s/$old_key/$key_path" /etc/hysteria/config.json
-    sed -i "s/$old_hyym/$hy_ym" /root/hy/hy-client.json
-    sed -i "s/$old_hyym/$hy_ym" /root/hy/clash-meta.yaml
-    sed -i "s/$old_hyym/$hy_ym" /root/hy/url.txt
+    sed -i "s/$old_cert/$cert_path/" /etc/hysteria/config.json
+    sed -i "s/$old_key/$key_path/" /etc/hysteria/config.json
+    sed -i "s/$old_hyym/$hy_ym/" /root/hy/hy-client.json
+    sed -i "s/$old_hyym/$hy_ym/" /root/hy/clash-meta.yaml
+    sed -i "s/$old_hyym/$hy_ym/" /root/hy/url.txt
     stophy && starthy
     green "The configuration is modified successfully, please re-import the node configuration file"
 }
@@ -430,10 +430,10 @@ change_cert(){
 change_pro(){
     old_pro=$(cat /etc/hysteria/config.json | grep protocol | awk -F " " '{print $2}' | sed "s/\"//g" | sed "s/,//g")
     inst_pro
-    sed -i "s/$old_pro/$protocol" /etc/hysteria/config.json
-    sed -i "s/$old_pro/$protocol" /root/hy/hy-client.json
-    sed -i "s/$old_pro/$protocol" /root/hy/clash-meta.yaml
-    sed -i "s/$old_pro/$protocol" /root/hy/url.txt
+    sed -i "s/$old_pro/$protocol/" /etc/hysteria/config.json
+    sed -i "s/$old_pro/$protocol/" /root/hy/hy-client.json
+    sed -i "s/$old_pro/$protocol/" /root/hy/clash-meta.yaml
+    sed -i "s/$old_pro/$protocol/" /root/hy/url.txt
     stophy && starthy
     green "The configuration is modified successfully, please re-import the node configuration file"
 }
@@ -451,10 +451,10 @@ change_port(){
         last_port=$port
     fi
 
-    sed -i "s/$old_port/$port" /etc/hysteria/config.json
-    sed -i "s/$old_port/$last_port" /root/hy/hy-client.json
-    sed -i "s/$old_port/$last_port" /root/hy/clash-meta.yaml
-    sed -i "s/$old_port/$last_port" /root/hy/url.txt
+    sed -i "s/$old_port/$port/" /etc/hysteria/config.json
+    sed -i "s/$old_port/$last_port/" /root/hy/hy-client.json
+    sed -i "s/$old_port/$last_port/" /root/hy/clash-meta.yaml
+    sed -i "s/$old_port/$last_port/" /root/hy/url.txt
 
     stophy && starthy
     green "The configuration is modified successfully, please re-import the node configuration file"
@@ -463,10 +463,10 @@ change_port(){
 change_pwd(){
     old_pwd=$(cat /etc/hysteria/config.json | grep password | sed -n 2p | awk -F " " '{print $2}' | sed "s/\"//g" | sed "s/,//g")
     inst_pwd
-    sed -i "s/$old_pwd/$auth_pwd" /etc/hysteria/config.json
-    sed -i "s/$old_pwd/$auth_pwd" /root/hy/hy-client.json
-    sed -i "s/$old_pwd/$auth_pwd" /root/hy/clash-meta.yaml
-    sed -i "s/$old_pwd/$auth_pwd" /root/hy/url.txt
+    sed -i "s/$old_pwd/$auth_pwd/" /etc/hysteria/config.json
+    sed -i "s/$old_pwd/$auth_pwd/" /root/hy/hy-client.json
+    sed -i "s/$old_pwd/$auth_pwd/" /root/hy/clash-meta.yaml
+    sed -i "s/$old_pwd/$auth_pwd/" /root/hy/url.txt
     stophy && starthy
     green "The configuration is modified successfully, please re-import the node configuration file"
 }
