@@ -196,7 +196,7 @@ inst_jump(){
 }
 
 inst_pwd(){
-    read -p "Set Hysteria password (carriage return is skipped for random characters) :  " auth_pwd
+    read -p "Set Hysteria password (carriage return is skipped for random characters) :  " $auth_pwd
     [[ -z $auth_pwd ]] && auth_pwd=$(date +%s%N | md5sum | cut -c 1-8)
     yellow "The password used on the Hysteria node is: $auth_pwd"
 }
