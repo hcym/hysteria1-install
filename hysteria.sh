@@ -474,7 +474,7 @@ change_pwd(){
 change_resolv(){
     old_resolv=$(cat /etc/hysteria/config.json | grep resolv | awk -F " " '{print $2}' | sed "s/\"//g" | sed "s/,//g")
     inst_resolv
-    sed -i "s|$old_resolv|$resolv" /etc/hysteria/config.json
+    sed -i "s/$old_resolv/$resolv/" /etc/hysteria/config.json
     stophy && starthy
     green "The configuration is modified successfully, please re-import the node configuration file"
 }
