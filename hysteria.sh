@@ -288,8 +288,8 @@ EOF
     "server": "$hy_ym:$last_port",
     "server_name": "$domain",
     "alpn": "h3",
-    "up_mbps": 50,
-    "down_mbps": 150,
+    "up_mbps": 100,
+    "down_mbps": 200,
     "auth_str": "$auth_pwd",
     "insecure": true,
     "retry": 3,
@@ -341,7 +341,7 @@ rules:
   - GEOIP,CN,DIRECT
   - MATCH,Proxy
 EOF
-    url="hysteria://$hy_ym:$port?protocol=$protocol&auth=$auth_pwd&peer=$domain&insecure=$true&upmbps=10&downmbps=50&alpn=h3#Peyman-Hysteria"
+    url="hysteria://$hy_ym:$port?protocol=$protocol&auth=$auth_pwd&peer=$domain&insecure=$true&upmbps=100&downmbps=200&alpn=h3#Peyman-Hysteria"
     echo $url > /root/hy/url.txt
 
     systemctl daemon-reload
