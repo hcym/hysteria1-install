@@ -429,7 +429,6 @@ change_cert(){
 
 change_pro(){
     old_pro=$(cat /etc/hysteria/config.json | grep protocol | awk -F " " '{print $2}' | sed "s/\"//g" | sed "s/,//g")
-    init_pro
     sed -i "s|$old_pro|$protocol" /etc/hysteria/config.json
     sed -i "s|$old_pro|$protocol" /root/hy/hy-client.json
     sed -i "s|$old_pro|$protocol" /root/hy/clash-meta.yaml
