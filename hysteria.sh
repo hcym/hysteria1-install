@@ -418,11 +418,11 @@ change_cert(){
             hy_ym=$(curl -s4m8 ip.p3terx.com -k | sed -n 1p) || hy_ym=$(curl -s6m8 ip.p3terx.com -k | sed -n 1p)
         fi
     fi
-    sed -i "s/$old_cert/$cert_path/" /etc/hysteria/config.json
-    sed -i "s/$old_key/$key_path/" /etc/hysteria/config.json
-    sed -i "s/$old_hyym/$hy_ym/" /root/hy/hy-client.json
-    sed -i "s/$old_hyym/$hy_ym/" /root/hy/clash-meta.yaml
-    sed -i "s/$old_hyym/$hy_ym/" /root/hy/url.txt
+    sed -i "s|$old_cert|$cert_path|" /etc/hysteria/config.json
+    sed -i "s|$old_key|$key_path|" /etc/hysteria/config.json
+    sed -i "s|$old_hyym|$hy_ym|" /root/hy/hy-client.json
+    sed -i "s|$old_hyym|$hy_ym|" /root/hy/clash-meta.yaml
+    sed -i "s|$old_hyym|$hy_ym|" /root/hy/url.txt
     stophy && starthy
     green "The configuration is modified successfully, please re-import the node configuration file"
 }
