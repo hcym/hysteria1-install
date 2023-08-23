@@ -508,10 +508,10 @@ showconf(){
 menu() {
     clear
     echo "###########################################################"
-    echo -e "#        ${RED}Hysteria 一one-click installation script${PLAIN}      #"
-    echo -e "# ${GREEN}Gihub ${PLAIN}: https://gitlab.com/Ptechgithub                #"
-    echo -e "# ${GREEN}Telegram ${PLAIN}: https://t.me/P_tech2024                     #"
-    echo -e "# ${GREEN}YouTube ${PLAIN}: https://www.youtube.com/@IR_TECH             #"
+    echo -e "#        ${RED}Hysteria 一one-click installation script${PLAIN}         #"
+    echo -e "# ${GREEN}Gihub ${PLAIN}: https://gitlab.com/Ptechgithub                  #"
+    echo -e "# ${GREEN}Telegram ${PLAIN}: https://t.me/P_tech2024                      #"
+    echo -e "# ${GREEN}YouTube ${PLAIN}: https://www.youtube.com/@IR_TECH              #"
     echo "###########################################################"
     echo ""
     echo -e " ${GREEN}1.${PLAIN} Install Hysteria"
