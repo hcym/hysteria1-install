@@ -341,7 +341,7 @@ rules:
   - GEOIP,CN,DIRECT
   - MATCH,Proxy
 EOF
-    url="hysteria://$hy_ym:$port?protocol=$protocol&auth=$auth_pwd&peer=$domain&insecure=$true&upmbps=50&downmbps=150&alpn=h3#Peyman-Hysteria"
+    url="hysteria://$hy_ym:$port?protocol=$protocol&auth=$auth_pwd&peer=$domain&insecure=$true&upmbps=50&downmbps=100&alpn=h3#Peyman-Hysteria"
     echo $url > /root/hy/url.txt
 
     systemctl daemon-reload
