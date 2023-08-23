@@ -461,7 +461,7 @@ change_port(){
 
 change_pwd(){
     old_pwd=$(cat /etc/hysteria/config.json | grep password | sed -n 2p | awk -F " " '{print $2}' | sed "s/\"//g" | sed "s/,//g")
-    init_pwd
+    inst_pwd
     sed -i "s|$old_pwd|$auth_pwd" /etc/hysteria/config.json
     sed -i "s|$old_pwd|$auth_pwd" /root/hy/hy-client.json
     sed -i "s|$old_pwd|$auth_pwd" /root/hy/clash-meta.yaml
