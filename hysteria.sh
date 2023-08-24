@@ -345,6 +345,9 @@ proxy-groups:
       - Peyman-Hysteria
       
 rules:
+  - DOMAIN-SUFFIX,speedtest.net,DIRECT
+  - DOMAIN-SUFFIX,fast.com,DIRECT
+  - DOMAIN-SUFFIX,speed.cloudflare.com,DIRECT  
   - DOMAIN-SUFFIX,ir,DIRECT
   - GEOIP,IR,DIRECT
   - MATCH,Proxy
