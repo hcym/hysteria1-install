@@ -126,7 +126,7 @@ inst_cert(){
         chmod +x /etc/hysteria/cert.crt
         chmod +x /etc/hysteria/private.key
         hy_ym="www.bing.com"
-        domain="www.bing.com"
+        domain="${sni:-www.bing.com}"
     fi
 }
 
@@ -196,9 +196,15 @@ inst_jump(){
 }
 
 inst_pwd(){
-    read -p "Set Hysteria password (carriage return is skipped for random characters) :  " auth_pwd
+    read -p "Set Hysteria password ( Enter for random password) :  " auth_pwd
     [[ -z $auth_pwd ]] && auth_pwd=$(date +%s%N | md5sum | cut -c 1-8)
     yellow "The password used on the Hysteria node is: $auth_pwd"
+}
+
+inst_speed(){
+    read -p "Enter your download speed (Mbps): " down_mbps
+    read -p "Enter your upload speed (Mbps): " up_mbps
+    read -p "Enter your SNI (Default: www.bing.com) : " sni
 }
 
 inst_resolv(){
@@ -238,6 +244,7 @@ inst_hy(){
     inst_pro
     inst_port
     inst_pwd
+    inst_speed
     inst_resolv
 
     # Setting up the Hysteria configuration file
@@ -288,8 +295,8 @@ EOF
     "server": "$hy_ym:$last_port",
     "server_name": "$domain",
     "alpn": "h3",
-    "up_mbps": 50,
-    "down_mbps": 150,
+    "up_mbps": "$up_mbps",
+    "down_mbps": "$down_mbps",
     "auth_str": "$auth_pwd",
     "insecure": true,
     "retry": 3,
@@ -327,8 +334,8 @@ proxies:
     alpn:
       - h3
     protocol: $protocol
-    up: 20
-    down: 100
+    up: $up_mbps
+    down: $down_mbps
     sni: $domain
     skip-cert-verify: true
 proxy-groups:
@@ -338,10 +345,11 @@ proxy-groups:
       - Peyman-Hysteria
       
 rules:
-  - GEOIP,CN,DIRECT
+  - DOMAIN-SUFFIX,ir,DIRECT
+  - GEOIP,IR,DIRECT
   - MATCH,Proxy
 EOF
-    url="hysteria://$hy_ym:$port?protocol=$protocol&auth=$auth_pwd&peer=$domain&insecure=$true&upmbps=50&downmbps=100&alpn=h3#Peyman-Hysteria"
+    url="hysteria://$hy_ym:$port?protocol=$protocol&upmbps=$up_mbps&downmbps=$down_mbps&auth=$auth_pwd&peer=$domain&insecure=$true&alpn=h3#Peyman-Hysteria"
     echo $url > /root/hy/url.txt
 
     systemctl daemon-reload
