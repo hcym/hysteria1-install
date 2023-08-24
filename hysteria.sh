@@ -349,7 +349,7 @@ rules:
   - GEOIP,IR,DIRECT
   - MATCH,Proxy
 EOF
-    url="hysteria://$hy_ym:$port?protocol=$protocol&upmbps=$up_mbps&downmbps=$down_mbps&auth=$auth_pwd&peer=$domain&insecure=$true&alpn=h3#Peyman-Hysteria"
+    url="hysteria://$hy_ym:$port?protocol=$protocol&upmbps=$up_mbps&downmbps=$down_mbps&auth=$auth_pwd&peer=$domain&insecure=1&alpn=h3#Peyman-Hysteria"
     echo $url > /root/hy/url.txt
 
     systemctl daemon-reload
