@@ -442,7 +442,7 @@ changeproxysite(){
     
     inst_site
 
-    sed -i "s#$oldproxysite#$proxysite#g" /etc/caddy/Caddyfile
+    sed -i "s#$oldproxysite#$proxysite#g" /etc/hysteria/config.yaml
 
     stophysteria && starthysteria
 
