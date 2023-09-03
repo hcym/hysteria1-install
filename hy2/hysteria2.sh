@@ -478,7 +478,7 @@ showconf(){
 
 menu() {
     clear
-    echo "###########################################################"
+    echo "1###########################################################"
     echo -e "#        ${RED}Hysteria 一one-click installation script${PLAIN}         #"
     echo -e "# ${GREEN}Gihub ${PLAIN}: https://gitlab.com/Ptechgithub                  #"
     echo -e "# ${GREEN}Telegram ${PLAIN}: https://t.me/P_tech2024                      #"
