@@ -408,12 +408,13 @@ changepasswd(){
     sed -i "1s#$oldpasswd#$passwd#g" /etc/hysteria/config.yaml
     sed -i "1s#$oldpasswd#$passwd#g" /root/hy/hy-client.yaml
     sed -i "3s#$oldpasswd#$passwd#g" /root/hy/hy-client.json
+    sed -i "s#$oldpasswd#$passwd#g" /root/hy/url.txt
 
     stophysteria && starthysteria
 
     green "Hysteria 2 node password successfully changed to: $passwd"
     yellow "Please manually update the client configuration file to use node"
-    showconf
+    cat /root/hy/url.txt
 }
 
 change_cert(){
@@ -427,12 +428,13 @@ change_cert(){
     sed -i "3s/$old_key/$key_path" /etc/hysteria/config.yaml
     sed -i "6s/$old_hydomain/$hy_domain" /root/hy/hy-client.yaml
     sed -i "5s/$old_hydomain/$hy_domain" /root/hy/hy-client.json
+    sed -i "5s/$old_hydomain/$hy_domain" /root/hy/url.txt
 
     stophysteria && starthysteria
 
     green "Hysteria 2 node certificate type successfully modified"
     yellow "Please manually update the client configuration file to use node"
-    showconf
+    cat /root/hy/url.txt
 }
 
 changeproxysite(){
