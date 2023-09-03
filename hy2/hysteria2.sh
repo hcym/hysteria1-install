@@ -448,7 +448,7 @@ changeproxysite(){
 
 changeconf(){
     green "The Hysteria 2 configuration change options are as follows:"
-    echo -e " ${GREEN}1.${PLAIN} modify port"
+    echo -e " ${GREEN}1.${PLAIN} Change port"
     echo -e " ${GREEN}2.${PLAIN} change Password"
     echo -e " ${GREEN}3.${PLAIN} Change certificate type"
     echo -e " ${GREEN}4.${PLAIN} Change website"
