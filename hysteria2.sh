@@ -163,7 +163,7 @@ inst_port(){
 inst_jump(){
     green "The Hysteria 2 port usage mode is as follows:"
     echo ""
-    echo -e " ${GREEN}1.${PLAIN} single port ${YELLOW}（默认）${PLAIN}"
+    echo -e " ${GREEN}1.${PLAIN} single port ${YELLOW}（default）${PLAIN}"
     echo -e " ${GREEN}2.${PLAIN} port hopping"
     echo ""
     read -rp "Please enter options [1-2]: " jumpInput
