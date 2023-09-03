@@ -488,7 +488,7 @@ menu() {
     echo -e " ${GREEN}2.${PLAIN} ${RED}Uninstall Hysteria 2${PLAIN}"
     echo " -------------"
     echo -e " ${GREEN}3.${PLAIN} Start/Stop/Restart"
-    echo -e " ${GREEN}4.${PLAIN} Modify configuration"
+    echo -e " ${GREEN}4.${PLAIN} Change configuration"
     echo -e " ${GREEN}5.${PLAIN} Show configuration file"
     echo " -------------"
     echo -e " ${GREEN}0.${PLAIN} exit script"
