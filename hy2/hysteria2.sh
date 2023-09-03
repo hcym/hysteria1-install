@@ -390,7 +390,9 @@ changeport(){
     sed -i "1s#$oldport#$port#g" /etc/hysteria/config.yaml
     sed -i "1s#$oldport#$port#g" /root/hy/hy-client.yaml
     sed -i "2s#$oldport#$port#g" /root/hy/hy-client.json
-
+    port=$(jq -r '.port' /root/hy/hy-client.json)
+    sed -i "s#:[0-9]\+#:$port#" /root/hy/url.txt
+    
     stophysteria && starthysteria
 
     green "Hysteria 2 port successfully modified to: $port"
