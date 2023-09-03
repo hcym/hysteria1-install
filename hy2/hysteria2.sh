@@ -396,7 +396,6 @@ changeport(){
 
     green "Hysteria 2 port successfully modified to: $port"
     yellow "Please manually update the client configuration file to use node"
-    showconf
 }
 
 changepasswd(){
