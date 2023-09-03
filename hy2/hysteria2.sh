@@ -428,7 +428,7 @@ change_cert(){
     sed -i "3s/$old_key/$key_path" /etc/hysteria/config.yaml
     sed -i "6s/$old_hydomain/$hy_domain" /root/hy/hy-client.yaml
     sed -i "5s/$old_hydomain/$hy_domain" /root/hy/hy-client.json
-    sed -i "5s/$old_hydomain/$hy_domain" /root/hy/url.txt
+    sed -i "s/$old_hydomain/$hy_domain" /root/hy/url.txt
 
     stophysteria && starthysteria
 
