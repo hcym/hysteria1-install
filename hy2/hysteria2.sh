@@ -61,9 +61,11 @@ inst_cert(){
     echo ""
     read -rp "please enter options [1-3]: " certInput
     if [[ $certInput == 2 ]]; then
+        cert_path="/root/cert.crt"
+        key_path="/root/private.key"
         if [[ -f /root/cert.crt && -f /root/private.key ]] && [[ -s /root/cert.crt && -s /root/private.key ]] && [[ -f /root/ca.log ]]; then
             domain=$(cat /root/ca.log)
-            green "The original domain name was detected: the certificate of $domain is being applied"
+            green "Legacy domain name detected: certificate for $domain, applying"
             hy_domain=$domain
         else
             WARPv4Status=$(curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
@@ -364,7 +366,7 @@ hysteriaswitch(){
     echo -e " ${GREEN}2.${PLAIN} Stop Hysteria 2"
     echo -e " ${GREEN}3.${PLAIN} Restart Hysteria 2"
     echo ""
-    read -rp "请输入选项 [0-3]: " switchInput
+    read -rp "please enter options [0-3]: " switchInput
     case $switchInput in
         1 ) starthysteria ;;
         2 ) stophysteria ;;
@@ -420,15 +422,14 @@ changepasswd(){
 change_cert(){
     old_cert=$(cat /etc/hysteria/config.yaml | grep cert | awk -F " " '{print $2}')
     old_key=$(cat /etc/hysteria/config.yaml | grep key | awk -F " " '{print $2}')
-    old_hydomain=$(cat /root/hysteria/hy-client.yaml | grep sni | awk '{print $2}')
+    old_hydomain=$(cat /root/hy/hy-client.yaml | grep sni | awk '{print $2}')
 
-    init_cert
+    inst_cert
 
-    sed -i "2s/$old_cert/$cert_path" /etc/hysteria/config.yaml
-    sed -i "3s/$old_key/$key_path" /etc/hysteria/config.yaml
-    sed -i "6s/$old_hydomain/$hy_domain" /root/hy/hy-client.yaml
-    sed -i "5s/$old_hydomain/$hy_domain" /root/hy/hy-client.json
-    sed -i "s/$old_hydomain/$hy_domain" /root/hy/url.txt
+    sed -i "s!$old_cert!$cert_path!g" /etc/hysteria/config.yaml
+    sed -i "s!$old_key!$key_path!g" /etc/hysteria/config.yaml
+    sed -i "6s/$old_hydomain/$hy_domain/g" /root/hy/hy-client.yaml
+    sed -i "5s/$old_hydomain/$hy_domain/g" /root/hy/hy-client.json
 
     stophysteria && starthysteria
 
