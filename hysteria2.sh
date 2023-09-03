@@ -194,7 +194,7 @@ inst_pwd(){
 }
 
 inst_site(){
-    read -rp "Please enter the fake website address of Hysteria 2 (remove https://) [Enter Sega maimai Japan website]: "proxysite
+    read -rp "Please enter the fake website address of Hysteria 2 (remove https://) [Enter Sega maimai Japan website]: " proxysite
     [[ -z $proxysite ]] && proxysite="maimai.sega.jp"
     yellow "The masquerading site used on the Hysteria 2 node is: $proxysite"
 }
