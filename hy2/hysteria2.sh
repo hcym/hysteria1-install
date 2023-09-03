@@ -435,7 +435,6 @@ change_cert(){
 
     green "Hysteria 2 node certificate type successfully modified"
     yellow "Please manually update the client configuration file to use node"
-    cat /root/hy/url.txt
 }
 
 changeproxysite(){
