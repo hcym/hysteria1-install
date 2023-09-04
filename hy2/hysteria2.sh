@@ -243,6 +243,11 @@ tls:
   cert: $cert_path
   key: $key_path
 
+obfs:
+  type: salamander
+  salamander:
+    password: $auth_pwd
+
 quic:
   initStreamReceiveWindow: 16777216
   maxStreamReceiveWindow: 16777216
@@ -277,6 +282,8 @@ tls:
   sni: $hy_domain
   insecure: true
 
+obfs: $auth_pwd
+
 quic:
   initStreamReceiveWindow: 16777216
   maxStreamReceiveWindow: 16777216
@@ -300,6 +307,7 @@ EOF
     "sni": "$hy_domain",
     "insecure": true
   },
+  "obfs": "$auth_pwd",
   "quic": {
     "initStreamReceiveWindow": 16777216,
     "maxStreamReceiveWindow": 16777216,
@@ -317,7 +325,7 @@ EOF
 }
 EOF
 
-    url="hysteria2://$auth_pwd@$ip:$last_port/?insecure=1&sni=$hy_domain"
+    url="hysteria2://$auth_pwd@$ip:$last_port/?insecure=1&sni=$hy_domain&obfs=$auth_pwd"
     echo $url > /root/hy/url.txt
 
     systemctl daemon-reload
