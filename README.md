@@ -16,7 +16,7 @@ After installation, update it to the latest version.  (Version 1.5.0)and above
 https://raw.githubusercontent.com/Ptechgithub/hysteria-install/main/hy2/sing-hy2.json
 ```
 
-
+.
   
 hysteria1
 
