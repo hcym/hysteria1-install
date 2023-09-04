@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/Ptechgithub/hysteria-install/main/hy2/sing-hy2
 ```
 
 
-.
+  
 hysteria1
 
 ```
