@@ -410,15 +410,21 @@ changeport(){
 }
 
 changepasswd(){
-    oldpasswd=$(cat /etc/hysteria/config.yaml 2>/dev/null | sed -n 15p | awk '{print $2}')
+    oldpasswd=$(cat /etc/hysteria/config.yaml 2>/dev/null | sed -n 20p | awk '{print $2}')
+    oldobfs=$(cat /etc/hysteria/config.yaml 2>/dev/null | sed -n 10p | awk '{print $2}')
 
     read -p "Set Hysteria 2 password (carriage return is skipped for random characters): " passwd
     [[ -z $passwd ]] && passwd=$(date +%s%N | md5sum | cut -c 1-8)
 
     sed -i "1s#$oldpasswd#$passwd#g" /etc/hysteria/config.yaml
-    sed -i "1s#$oldpasswd#$passwd#g" /root/hy/hy-client.yaml
+    sed -i "10s#$oldobfs#$passwd#g" /etc/hysteria/config.yaml
+    sed -i "3s#$oldpasswd#$passwd#g" /root/hy/hy-client.yaml
+    sed -i "9s#$oldobfs#$passwd#g" /root/hy/hy-client.yaml
     sed -i "3s#$oldpasswd#$passwd#g" /root/hy/hy-client.json
+    sed -i "8s#$oldobfs#$passwd#g" /root/hy/hy-client.json
     sed -i "s#$oldpasswd#$passwd#g" /root/hy/url.txt
+    sed -i "s#$oldobfs#$passwd#g" /root/hy/url.txt
+    
 
     stophysteria && starthysteria
 
