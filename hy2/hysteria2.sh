@@ -416,7 +416,7 @@ changepasswd(){
     read -p "Set Hysteria 2 password (carriage return is skipped for random characters): " passwd
     [[ -z $passwd ]] && passwd=$(date +%s%N | md5sum | cut -c 1-8)
 
-    sed -i "1s#$oldpasswd#$passwd#g" /etc/hysteria/config.yaml
+    sed -i "20s#$oldpasswd#$passwd#g" /etc/hysteria/config.yaml
     sed -i "10s#$oldobfs#$passwd#g" /etc/hysteria/config.yaml
     sed -i "3s#$oldpasswd#$passwd#g" /root/hy/hy-client.yaml
     sed -i "9s#$oldobfs#$passwd#g" /root/hy/hy-client.yaml
