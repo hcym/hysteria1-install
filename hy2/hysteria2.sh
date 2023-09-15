@@ -49,7 +49,7 @@ if [[ -z $(type -P curl) ]]; then
 fi
 
 realip(){
-    ip=$(curl -s4m8 ip.p3terx.com -k | sed -n 1p) || ip=$(curl -s6m8 ip.p3terx.com -k | sed -n 1p)
+    ip=$(curl -s4m8 ip.sb -k) || ip=$(curl -s6m8 ip.sb -k)
 }
 
 inst_cert(){
@@ -63,6 +63,9 @@ inst_cert(){
     if [[ $certInput == 2 ]]; then
         cert_path="/root/cert.crt"
         key_path="/root/private.key"
+
+        chmod a+x /root # Let the Hysteria main program access the /root directory
+
         if [[ -f /root/cert.crt && -f /root/private.key ]] && [[ -s /root/cert.crt && -s /root/private.key ]] && [[ -f /root/ca.log ]]; then
             domain=$(cat /root/ca.log)
             green "Legacy domain name detected: certificate for $domain, applying"
@@ -73,11 +76,11 @@ inst_cert(){
             if [[ $WARPv4Status =~ on|plus ]] || [[ $WARPv6Status =~ on|plus ]]; then
                 wg-quick down wgcf >/dev/null 2>&1
                 systemctl stop warp-go >/dev/null 2>&1
-                ip=$(curl -s4m8 ip.p3terx.com -k | sed -n 1p) || ip=$(curl -s6m8 ip.p3terx.com -k | sed -n 1p)
+                realip
                 wg-quick up wgcf >/dev/null 2>&1
                 systemctl start warp-go >/dev/null 2>&1
             else
-                ip=$(curl -s4m8 ip.p3terx.com -k | sed -n 1p) || ip=$(curl -s6m8 ip.p3terx.com -k | sed -n 1p)
+                realip
             fi
             
             read -p "Please enter the domain name to apply for a certificate：" domain
@@ -270,6 +273,13 @@ EOF
         last_port="$port,$firstport-$endport"
     else
         last_port=$port
+    fi
+
+    # Add brackets to the IPv6 address
+    if [[ -n $(echo $ip | grep ":") ]]; then
+        last_ip="[$ip]"
+    else
+        last_ip=$ip
     fi
 
     mkdir /root/hy
