@@ -1,6 +1,6 @@
 # hysteria-install
 
-hysteria2
+ hysteria2
 
 ```
 wget -N --no-check-certificate https://raw.githubusercontent.com/Ptechgithub/hysteria-install/main/hy2/hysteria2.sh && bash hysteria2.sh
@@ -18,7 +18,7 @@ https://raw.githubusercontent.com/Ptechgithub/hysteria-install/main/hy2/sing-hy2
 
 .
   
-hysteria1
+ hysteria1
 
 ```
 wget -N --no-check-certificate https://raw.githubusercontent.com/Ptechgithub/hysteria-install/main/hysteria.sh && bash hysteria.sh
