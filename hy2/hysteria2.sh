@@ -124,10 +124,10 @@ inst_cert(){
             fi
         fi
     elif [[ $certInput == 3 ]]; then
-        read -p "Please enter the path of the public key file crt: " certpath
-        yellow "The path of the public key file crt: $certpath"
-        read -p "Please enter the path of the key file key: " keypath
-        yellow "The path of the key file key: $keypath"
+        read -p "Please enter the path of the public key file crt: " cert_path
+        yellow "The path of the public key file crt: $cert_path"
+        read -p "Please enter the path of the key file key: " key_path
+        yellow "The path of the key file key: $key_path"
         read -p "Please enter the domain name of the certificate: " domain
         yellow "Certificate domain name: $domain"
         hy_domain=$domain
