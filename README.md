@@ -1,4 +1,4 @@
-# hysteria-install
+# hysteria1+2-install
 
  hysteria2
 
