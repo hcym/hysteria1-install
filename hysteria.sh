@@ -324,7 +324,7 @@ dns:
   nameserver:
     - 8.8.8.8
     - 1.1.1.1
-    - 114.114.114.114
+    - 1.2.4.8
 proxies:
   - name: Peyman-Hysteria
     type: hysteria
