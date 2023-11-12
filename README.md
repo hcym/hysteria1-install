@@ -1,4 +1,4 @@
-# hysteria1-install
+# hysteria 1-install
 
  hysteria2
 
